@@ -19,17 +19,27 @@ def predict():
     monthly = float(request.form["MonthlyCharges"])
     total = float(request.form["TotalCharges"])
 
-    # Dummy input with 19 features
-    data = np.array([[gender, senior, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, monthly, total]])
+    # Input data
+    data = np.array([[gender, senior, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, monthly, total]])
 
+    # Prediction
     prediction = model.predict(data)
+
+    # Probability
+    probability = model.predict_proba(data)
 
     if prediction[0] == 1:
         result = "Customer Will Churn"
+        prob = round(probability[0][1] * 100, 2)
     else:
         result = "Customer Will Stay"
+        prob = round(probability[0][0] * 100, 2)
 
-    return render_template("index.html", prediction_text=result)
+    return render_template(
+        "index.html",
+        prediction_text=result,
+        probability=prob
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)

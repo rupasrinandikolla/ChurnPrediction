@@ -34,4 +34,4 @@ This project predicts whether a telecom customer is likely to leave the company 
 3. Open http://127.0.0.1:5000 in browser
 ## Project Screenshot
 
-![Project Result](screenshots/results_ss.png)
+![Project Result](screenshot/results_ss.png)
